@@ -1,14 +1,36 @@
 import { Link } from 'react-router-dom';
+import React, { useEffect , useState } from 'react'
 import StoryPage from './StoryPage';
 
-function RoomPage() {
-    
-    return (
-      <div>
-          <h2>create a room</h2>
-          <StoryPage display={false} />
-      </div>
-    );
-  }
+export default class RoomPage extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
+    state = {
+        displayStory: false
+    }
+
+    startStory = () => {
+        console.log(this.props.match.params.code);
+        this.setState({
+            displayStory: true
+        })
+    }
   
-export default RoomPage;
+    render() {
+      return (
+        <div>
+            {!this.state.displayStory && 
+                <div>
+                    <h2>Create a Room</h2>
+                    <button onClick={this.startStory}>Start Story</button>
+                </div>
+            }
+            {this.state.displayStory && 
+                <StoryPage />
+            }
+        </div>
+      )
+    }
+}
