@@ -1,14 +1,27 @@
-import { Link } from 'react-router-dom';
+import React, {  useState } from 'react'
+import { Link, useHistory } from 'react-router-dom';
 
 function HomePage() {
-    return (
-      <div>
-          <h2>a cozy home</h2>
-          <Link to="/story">
-              <h3>Story</h3>
-          </Link>
-      </div>
-    );
+  const history = useHistory();
+
+
+  const createPublicRoom = () => {
+    var code = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 5; i++) {
+      code += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    //later on check if the roomcode already exists in the database
+    history.push(`/room:${code}`);
   }
+
+  return (
+    <div>
+        <h2>a cozy home</h2>
+        <button onClick={createPublicRoom}>Create Public Room</button>
+    </div>
+  );
+}
   
 export default HomePage;
