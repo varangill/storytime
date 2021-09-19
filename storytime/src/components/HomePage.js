@@ -1,5 +1,6 @@
-import React, {  useState } from 'react'
-import { Link, useHistory } from 'react-router-dom';
+import React from 'react'
+import { useHistory } from 'react-router-dom';
+import database, {firebase, googleAuthProvider} from '../firebase/firebase.js'
 
 function HomePage() {
   const history = useHistory();
@@ -7,12 +8,20 @@ function HomePage() {
 
   const createPublicRoom = () => {
     var code = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     for (var i = 0; i < 5; i++) {
       code += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     //later on check if the roomcode already exists in the database
+
+
+    database.ref(`ids/${firebase.auth().currentUser.uid}`).once('value').then((snapshot) => {
+      const username = snapshot.val();
+    }).catch((e) => {
+        
+    });
+
+    database.ref(`rooms/${code}/host`).set(firebase.auth().currentUser.uid);
     history.push(`/room:${code}`);
   }
 
