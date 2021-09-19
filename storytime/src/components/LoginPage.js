@@ -1,6 +1,7 @@
 import database, {firebase, googleAuthProvider} from '../firebase/firebase'
 import React from 'react'
 import { Link } from 'react-router-dom';
+import background from './assets/background.jpeg'
 
 export default class LoginPage extends React.Component {
     constructor(props) {
@@ -66,8 +67,9 @@ export default class LoginPage extends React.Component {
 
 
     render() {
+
       return (
-        <div>
+        <div className="container" style={{color: "#CCEEFF", backgroundImage: `url(${background})`, height: "100%", width: "100%", backgroundRepeat: "repeat", resizeMode: "stretch"}}>
             {!this.state.redirectable && 
                 <div>
                     {!this.state.isLoggedIn && 

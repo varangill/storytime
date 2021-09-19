@@ -121,7 +121,7 @@ function HomePage() {
 
   return (
     // Background colours
-    <div style={{color: "#CCEEFF", backgroundImage: `url(${background})`, height: "100%", width: "100%", backgroundRepeat: "repeat", resizeMode: "stretch"}}>
+    <div className="container" style={{color: "#CCEEFF", backgroundImage: `url(${background})`, height: "100%", width: "100%", backgroundRepeat: "repeat", resizeMode: "stretch"}}>
         <img src={tree} alt="tree" width="0" height="0" style={imageStyle1}/>;
         <div style={{display: 'flex'}}>
           <img src={name} alt="name" width="750" height="250" style={imageStyle1}/>;
@@ -155,21 +155,6 @@ function HomePage() {
         </div>
 
         <h4 style={filler}></h4>
-
-{/* =======
-    <div>
-        <h2>a cozy home</h2>
-        <button onClick={createPublicRoom}>Create Public Room</button>
-        <form onSubmit={onSubmitCode}>
-            <input 
-              type="text"
-              placeholder="Enter room code"
-              value={search}
-              onChange={onChangeSearch}
-            />
-            <button>Search for Room</button>
-          </form>
->>>>>>> dc8a4d6987374d9dec49f0128207ed7b13db0eb7 */}
     </div>
   );
 }

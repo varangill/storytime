@@ -129,20 +129,12 @@ export default class RoomPage extends React.Component {
             marginRight: "auto",
         }
 
-        const filler = {
-            fontSize: 20,
-            color: "#FCF7F8",
-            textAlign: "center",
-            paddingTop: "10000px",
-
-        }
-
 
 
         return (
 
 
-            <div>
+            <div className="container">
 
 
 
@@ -151,7 +143,7 @@ export default class RoomPage extends React.Component {
 
 
                     <div>
-                        <div style={{ color: "#CCEEFF", backgroundImage: `url(${background})`, height: "100%", width: "100%", backgroundRepeat: "repeat", resizeMode: "stretch" }}>
+                        <div style={{ color: "#CCEEFF", backgroundImage: `url(${background})`, height: "100%", width: "100%", resizeMode: "stretch" }}>
 
                             <img src={tree} alt="tree" width="0" height="0" style={imageStyle1} />;
                            
@@ -184,7 +176,6 @@ export default class RoomPage extends React.Component {
                             {this.state.show ? <h2 style={subtitle}>{this.state.word}</h2> : ''}
                             <button style={incButton} onClick={this.IncrementItemWord}>+</button>
                         </div>
-                        <h4 style={filler}></h4>
                     </div> </div>
 
 

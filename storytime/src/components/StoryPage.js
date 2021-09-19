@@ -60,7 +60,7 @@ export default class StoryPage extends React.Component {
 
     const subtitle = {
       fontSize: 20,
-      color: "#4a54f1",
+      color: '#000000',
       textAlign: "center",
       paddingTop: "0px",
       fontFamily: "Ubuntu",
@@ -74,7 +74,8 @@ export default class StoryPage extends React.Component {
       paddingRight: "10px",
       paddingLeft: "10px",
       marginLeft: "auto",
-      marginRight: "auto", backgroundColor: "#3E86C2",
+      marginRight: "auto", 
+      backgroundColor: "#3E86C2",
       borderRadius: 5,
       borderColor: "#3E86C2",
       width: '270px'
@@ -83,46 +84,26 @@ export default class StoryPage extends React.Component {
     const inputStyle1 = {
       fontSize: 20,
       color: "black",
-      paddingTop: "10px",
-      paddingBottom: "10px",
-      paddingRight: "10px",
-      paddingLeft: "10px",
-      marginLeft: "auto",
-      marginRight: "auto", backgroundColor: "white",
+      padding: "10px",
+      backgroundColor: "white",
       borderRadius: 5,
       borderColor: "#3E86C2",
       fontType: "Ubuntu",
+      margin: "0 10% 50px 10%",
+      width: '80%'
     }
 
-    const imageStyle1 = {
-      fontSize: 20,
-      color: "white",
-      paddingTop: "10px",
-      paddingBottom: "10px",
-      paddingRight: "10px",
-      paddingLeft: "10px",
-      marginLeft: "auto",
-      marginRight: "auto",
-    }
-
-    const filler = {
-      fontSize: 20,
-      color: "#FCF7F8",
-      textAlign: "center",
-      paddingTop: "10px",
-
-    }
     return (
       
-      <div>
+      <div className="container">
         <h3 style={title}> The Story</h3>
-        <h4  style={subtitle}>{this.state.story}</h4>
+        <h4 className="story">{this.state.story}</h4>
         {!this.state.prompted &&
           <div >
-            <h3 style={subtitle}>Enter in the story's next sentence!</h3>
+            <h3 style={subtitle}>Write a sentence for this story!</h3>
             {!this.state.story.length == 0 &&
               <div style={subtitle}>
-                <h3>Your prompt: {this.state.prompt} </h3>
+                <h3 id="prompt">Your prompt: <p>{this.state.prompt}</p> </h3>
               </div>
             }
             <form onSubmit={this.onSubmitStory}>
@@ -144,7 +125,7 @@ export default class StoryPage extends React.Component {
 
         {this.state.prompted &&
           <div style={subtitle}>
-            <h3>Enter in a prompt for the next player!</h3>
+            <h3 style={subtitle}>Write a prompt for the next player!</h3>
             <form onSubmit={this.onSubmitPrompt}>
               <div style={{display: 'flex', alignSelf: 'center', textAlign: 'center'}}>
               <input
