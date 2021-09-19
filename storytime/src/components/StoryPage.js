@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import background from './assets/background.jpeg'
 
 export default class StoryPage extends React.Component {
   constructor(props) {
@@ -114,12 +115,21 @@ export default class StoryPage extends React.Component {
     }
     return (
       
-      <div>
+      <div style={{color: "#CCEEFF", backgroundImage: `url(${background})`, height: "100%", width: "100%", backgroundRepeat: "repeat", resizeMode: "stretch"}}>
         <h3 style={title}> The Story</h3>
         <h4  style={subtitle}>{this.state.story}</h4>
         {!this.state.prompted &&
           <div >
+            <h4 style={filler}></h4>
+            <h4 style={filler}></h4>
+            <h4 style={filler}></h4>
+            <h4 style={filler}></h4>
+            <h4 style={filler}></h4>
+            <h4 style={filler}></h4>
+            <h4 style={filler}></h4>
+            <h4 style={filler}></h4>
             <h3 style={subtitle}>Enter in the story's next sentence!</h3>
+            <h4 style={filler}></h4>
             {!this.state.story.length == 0 &&
               <div style={subtitle}>
                 <h3>Your prompt: {this.state.prompt} </h3>
@@ -138,12 +148,20 @@ export default class StoryPage extends React.Component {
               <div style={{display: 'flex', alignSelf: 'center', textAlign: 'center'}}>
               <button  style={buttonStyle1}>Submit Sentence</button>
               </div>
+              <h4 style={filler}></h4>
             </form>
           </div>
         }
 
         {this.state.prompted &&
           <div style={subtitle}>
+            <h4 style={filler}></h4>
+            <h4 style={filler}></h4>
+            <h4 style={filler}></h4>
+            <h4 style={filler}></h4>
+            <h4 style={filler}></h4>
+            <h4 style={filler}></h4>
+            <h4 style={filler}></h4>
             <h3>Enter in a prompt for the next player!</h3>
             <form onSubmit={this.onSubmitPrompt}>
               <div style={{display: 'flex', alignSelf: 'center', textAlign: 'center'}}>
@@ -158,6 +176,8 @@ export default class StoryPage extends React.Component {
               <div style={{display: 'flex', alignSelf: 'center', textAlign: 'center'}}>
               <button style={buttonStyle1}>Submit Prompt</button>
               </div>
+              <h4 style={filler}></h4>
+              <h4 style={filler}></h4>
             </form>
           </div>
         }
