@@ -2,6 +2,8 @@ import React, {  useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import logo from './assets/logo.png'
 import tree from './assets/tree.png'
+import name from './assets/name.png'
+import background from './assets/background.jpeg'
 
 function HomePage() {
   const history = useHistory();
@@ -66,7 +68,7 @@ function HomePage() {
     fontSize: 20,
     color: "#FCF7F8",
     textAlign: "center",
-    paddingTop: "10px",
+    paddingTop: "0px",
   }
 
   const createPublicRoom = () => {
@@ -82,13 +84,14 @@ function HomePage() {
 
   return (
     // Background colour
-    <div style={{color: "#CCEEFF", backgroundColor: "#CCEEFF"}}>
+    <div style={{color: "#CCEEFF", backgroundImage: `url(${background})`, height: "100%", width: "100%", backgroundRepeat: "repeat", resizeMode: "stretch"}}>
         <img src={tree} alt="tree" width="0" height="0" style={imageStyle1}/>;
-        <h2 style={title}>Story Time</h2>
-        <h3 style={subtitle}>An interactive story teller</h3>
+        <div style={{display: 'flex'}}>
+          <img src={name} alt="name" width="750" height="250" style={imageStyle1}/>;
+        </div>
         
         <div style={{display: 'flex'}}>
-          <img src={logo} alt="logo" width="300" height="300" style={imageStyle1}/>;
+          <img src={logo} alt="logo" width="300" height="200" style={imageStyle1}/>;
         </div>
 
 
