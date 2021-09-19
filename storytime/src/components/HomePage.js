@@ -1,4 +1,4 @@
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import logo from './assets/logo.png'
 import tree from './assets/tree.png'
@@ -8,13 +8,13 @@ import background from './assets/background.jpeg'
 function HomePage() {
   const history = useHistory();
 
-  
+
   const title = {
     fontSize: 50,
     color: "#4a54f1",
     textAlign: "center",
     paddingTop: "100px",
-
+    fontFamily: "Ubuntu",
   }
 
 
@@ -23,6 +23,7 @@ function HomePage() {
     color: "#4a54f1",
     textAlign: "center",
     paddingTop: "0px",
+    fontFamily: "Ubuntu",
   }
 
   const buttonStyle1 = {
@@ -33,7 +34,7 @@ function HomePage() {
     paddingRight: "10px",
     paddingLeft: "10px",
     marginLeft: "auto",
-    marginRight: "auto", backgroundColor: "#3E86C2", 
+    marginRight: "auto", backgroundColor: "#3E86C2",
     borderRadius: 5,
     borderColor: "#3E86C2",
     width: '270px'
@@ -47,10 +48,10 @@ function HomePage() {
     paddingRight: "10px",
     paddingLeft: "10px",
     marginLeft: "auto",
-    marginRight: "auto", backgroundColor: "white", 
+    marginRight: "auto", backgroundColor: "white",
     borderRadius: 5,
     borderColor: "#3E86C2",
-    
+    fontType: "Ubuntu",
   }
 
   const imageStyle1 = {
@@ -61,7 +62,7 @@ function HomePage() {
     paddingRight: "10px",
     paddingLeft: "10px",
     marginLeft: "auto",
-    marginRight: "auto", 
+    marginRight: "auto",
   }
 
   const filler = {
@@ -69,6 +70,7 @@ function HomePage() {
     color: "#FCF7F8",
     textAlign: "center",
     paddingTop: "0px",
+
   }
 
   const createPublicRoom = () => {
@@ -83,7 +85,7 @@ function HomePage() {
   }
 
   return (
-    // Background colour
+    // Background colours
     <div style={{color: "#CCEEFF", backgroundImage: `url(${background})`, height: "100%", width: "100%", backgroundRepeat: "repeat", resizeMode: "stretch"}}>
         <img src={tree} alt="tree" width="0" height="0" style={imageStyle1}/>;
         <div style={{display: 'flex'}}>
@@ -118,8 +120,9 @@ function HomePage() {
         </div>
 
         <h4 style={filler}></h4>
+]
     </div>
   );
 }
-  
+
 export default HomePage;
