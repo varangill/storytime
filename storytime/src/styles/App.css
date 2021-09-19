@@ -1,16 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
+
+/* * {
+  margin: 0;
+  border: 0;
+} */
+
+/* body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+  background-color: #FCF7F8;
+} */
+
 body{
-  background: #eab0dc;
+  background-color: #FCF7F8;
+  background-image: url("../components/assets/background.jpeg");
   font-family: ubuntu;
 }
 
 h1{
   color: #fff;
-  font-size: 64px;
+  font-size: 50px;
   letter-spacing: 2px;
-  margin-top: 80px;
+  margin-top: 35px;
   text-align: center;
 }
 
+.subtitle {
+  color: #3E86C2;
+  font-size: 30px;
+  text-align: center;
+}
+
+h3 {
+  color: white;
+  /* TODO: style this to the left */
+}
 .content{
   background: #fff;
   max-width: 960px;
@@ -18,6 +44,10 @@ h1{
   padding:  20px 30px;
   border-radius: 10px 120px 10px 10px;
   box-shadow: 1px 3px 5px rgba(0,0,0,0.1)
+}
+
+.container {
+
 }
 
 ul{
@@ -99,4 +129,23 @@ button{
   font-family: ubuntu;
   letter-spacing: 1px;
   color: #999;
+}
+
+.story {
+  background-color: white;
+  color: black;
+  padding: 32px;
+  border: solid 3px #AED5F6;
+  margin: 0 10% 0 10%;
+  border-radius: 25px;
+}
+
+#prompt {
+  text-align: center;
+  font-weight: bold;
+  color: #2A2D73;
+  margin: 5px;
+}
+#timer {
+  flex:1;
 }

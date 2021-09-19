@@ -77,14 +77,6 @@ export default class RoomPage extends React.Component {
             fontFamily: "Ubuntu",
         }
 
-        const title2 = {
-            fontSize: 50,
-            color: "#4a54f1",
-            textAlign: "center",
-            paddingTop: "10px",
-            fontFamily: "Ubuntu",
-        }
-
 
         const subtitle = {
             fontSize: 20,
@@ -113,17 +105,8 @@ export default class RoomPage extends React.Component {
             color: "white",
             backgroundColor: "#3E86C2",
             borderColor: "#3E86C2",
-            width: '100px', 
-            fontSize: 30
+            width: '100px'
         }
-
-        const filler = {
-            fontSize: 20,
-            color: "#FCF7F8",
-            textAlign: "center",
-            paddingTop: "0px",
-        
-          }
 
         const inputStyle1 = {
             fontSize: 20,
