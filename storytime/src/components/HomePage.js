@@ -4,8 +4,11 @@ import logo from './assets/logo.png'
 import tree from './assets/tree.png'
 import name from './assets/name.png'
 import background from './assets/background.jpeg'
+import database, {firebase} from '../firebase/firebase.js'
 
 function HomePage() {
+  const [search, setSearch] = useState('');
+  const [error, setError] = useState('');
   const history = useHistory();
 
 
@@ -75,14 +78,46 @@ function HomePage() {
 
   const createPublicRoom = () => {
     var code = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     for (var i = 0; i < 5; i++) {
       code += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     //later on check if the roomcode already exists in the database
-    history.push(`/room:${code}`);
+
+    database.ref(`ids/${firebase.auth().currentUser.uid}`).once('value').then((snapshot) => {
+      database.ref(`rooms/${code}/host`).set(firebase.auth().currentUser.uid);
+      database.ref(`rooms/${code}/numOfPlayers`).set(1);
+      database.ref(`rooms/${code}/players/1`).set(snapshot.val());
+      history.push(`/room:${code}`);
+    }).catch((e) => {
+        
+    });
   }
+
+  const onChangeSearch = (e) => {
+    setSearch(e.target.value);
+  }
+
+  const onSubmitCode = (e) => {
+    e.preventDefault();
+    database.ref(`rooms/${search}/numOfPlayers`).once('value').then((snapshot) => {
+      if (snapshot.exists()) {
+        const num = snapshot.val();
+        database.ref(`ids/${firebase.auth().currentUser.uid}`).once('value').then((snapshot) => {
+          database.ref(`rooms/${search}/numOfPlayers`).set(num + 1);
+          database.ref(`rooms/${search}/players/${num+1}`).set(snapshot.val());
+          history.push(`/room:${search}`);
+        }).catch((e) => {
+            
+        });
+      } else {
+
+      }
+    }).catch((e) => {
+        
+    });
+
+  };
 
   return (
     // Background colours
@@ -120,7 +155,21 @@ function HomePage() {
         </div>
 
         <h4 style={filler}></h4>
-]
+
+{/* =======
+    <div>
+        <h2>a cozy home</h2>
+        <button onClick={createPublicRoom}>Create Public Room</button>
+        <form onSubmit={onSubmitCode}>
+            <input 
+              type="text"
+              placeholder="Enter room code"
+              value={search}
+              onChange={onChangeSearch}
+            />
+            <button>Search for Room</button>
+          </form>
+>>>>>>> dc8a4d6987374d9dec49f0128207ed7b13db0eb7 */}
     </div>
   );
 }
