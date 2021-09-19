@@ -146,3 +146,6 @@ button{
   color: #2A2D73;
   margin: 5px;
 }
+#timer {
+  flex:1;
+}
