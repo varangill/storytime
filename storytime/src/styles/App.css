@@ -1,31 +1,41 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
 
-* {
+/* * {
   margin: 0;
   border: 0;
-}
+} */
 
-body {
+/* body {
   font-family: 'Open Sans', sans-serif;
 }
 
 .container {
   background-color: #FCF7F8;
-}
+} */
 
 body{
   background: #eab0dc;
-  font-family: ubuntu;
+  font-family: 'Open Sans', sans-serif;
 }
 
 h1{
   color: #fff;
-  font-size: 64px;
+  font-size: 50px;
   letter-spacing: 2px;
-  margin-top: 80px;
+  margin-top: 35px;
   text-align: center;
 }
 
+.subtitle {
+  color: #3E86C2;
+  font-size: 30px;
+  text-align: center;
+}
+
+h3 {
+  color: white;
+  /* TODO: style this to the left */
+}
 .content{
   background: #fff;
   max-width: 960px;
@@ -114,4 +124,19 @@ button{
   font-family: ubuntu;
   letter-spacing: 1px;
   color: #999;
+}
+
+.story {
+  background-color: white;
+  color: black;
+  padding: 32px;
+  border: solid 3px #AED5F6;
+  margin: 0 10% 0 10%;
+}
+
+#prompt {
+  text-align: center;
+  font-weight: bold;
+  color: #2A2D73;
+  margin: 5px;
 }

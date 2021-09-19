@@ -50,14 +50,15 @@ export default class StoryPage extends React.Component {
   render() {
     return (
       <div>
-        <h3>The Story</h3>
-        <h4>{this.state.story}</h4>
+        <h1 className="title"> Story Time </h1>
+        <h3 className="subtitle">The Story</h3>
+        <h4 className="story">{this.state.story}</h4>
         {!this.state.prompted && 
           <div>
-              <h3>Enter in the story's next sentence!</h3>
+              <h3>Write a sentence for this story</h3>
               {!this.state.story.length == 0 &&
                 <div>
-                  <h3>Your prompt: {this.state.prompt} </h3>
+                  <h3>Your prompt: <p id="prompt">{this.state.prompt}</p> </h3>
                 </div>
               }
               <form onSubmit={this.onSubmitStory}>
