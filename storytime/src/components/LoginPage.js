@@ -51,8 +51,9 @@ export default class LoginPage extends React.Component {
                     if (snapshot.exists()) {
                         this.setState(() => ({ error: 'Username already exists' }));
                     } else {
-                        database.ref(`usernames/${this.state.username}`).set(true);
+                        database.ref(`usernames/${this.state.username}`).set(firebase.auth().currentUser.uid);
                         database.ref(`ids/${firebase.auth().currentUser.uid}`).set(this.state.username);
+                        this.setState(() => ({ redirectable: true }));
                     }
                 }).catch((e) => {
                     this.setState(() => ({ error: 'Error fetching data' }));

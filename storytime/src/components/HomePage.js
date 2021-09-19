@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
-import database, {firebase, googleAuthProvider} from '../firebase/firebase.js'
+import database, {firebase} from '../firebase/firebase.js'
 
 function HomePage() {
+  const [search, setSearch] = useState('');
+  const [error, setError] = useState('');
   const history = useHistory();
 
 
@@ -14,21 +16,54 @@ function HomePage() {
     }
     //later on check if the roomcode already exists in the database
 
-
     database.ref(`ids/${firebase.auth().currentUser.uid}`).once('value').then((snapshot) => {
-      const username = snapshot.val();
+      database.ref(`rooms/${code}/host`).set(firebase.auth().currentUser.uid);
+      database.ref(`rooms/${code}/numOfPlayers`).set(1);
+      database.ref(`rooms/${code}/players/1`).set(snapshot.val());
+      history.push(`/room:${code}`);
+    }).catch((e) => {
+        
+    });
+  }
+
+  const onChangeSearch = (e) => {
+    setSearch(e.target.value);
+  }
+
+  const onSubmitCode = (e) => {
+    e.preventDefault();
+    database.ref(`rooms/${search}/numOfPlayers`).once('value').then((snapshot) => {
+      if (snapshot.exists()) {
+        const num = snapshot.val();
+        database.ref(`ids/${firebase.auth().currentUser.uid}`).once('value').then((snapshot) => {
+          database.ref(`rooms/${search}/numOfPlayers`).set(num + 1);
+          database.ref(`rooms/${search}/players/${num+1}`).set(snapshot.val());
+          history.push(`/room:${search}`);
+        }).catch((e) => {
+            
+        });
+      } else {
+
+      }
     }).catch((e) => {
         
     });
 
-    database.ref(`rooms/${code}/host`).set(firebase.auth().currentUser.uid);
-    history.push(`/room:${code}`);
-  }
+  };
 
   return (
     <div>
         <h2>a cozy home</h2>
         <button onClick={createPublicRoom}>Create Public Room</button>
+        <form onSubmit={onSubmitCode}>
+            <input 
+              type="text"
+              placeholder="Enter room code"
+              value={search}
+              onChange={onChangeSearch}
+            />
+            <button>Search for Room</button>
+          </form>
     </div>
   );
 }
