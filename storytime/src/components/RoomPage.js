@@ -5,33 +5,62 @@ import database, {firebase} from '../firebase/firebase.js'
 export default class RoomPage extends React.Component {
     constructor(props) {
         super(props);
+        
         const roomCode = props.match.params.code.substring(1);
-        console.log(roomCode)
-        database.ref(`rooms/${roomCode}/host`).once('value').then((snapshot) => {
-            console.log("snapshot: " + snapshot.val());
-            console.log("auth: " + firebase.auth().currentUser.uid)
-            if (snapshot.val() == firebase.auth().currentUser.uid) {
-                console.log("you're host")
+        database.ref(`rooms/${roomCode}`).once('value').then((snapshot) => {
+            if (snapshot.val().host == firebase.auth().currentUser.uid) {
                 this.setState(() => ({ isHost: true }));
             } else {
-                console.log("not host");
                 this.setState(() => ({ isHost: false }));
+            }
+            const numOfPlayers = snapshot.val().numOfPlayers;
+            this.setState(() => ({ playerNum: numOfPlayers-1 }));
+            let newPlayers = []
+            for (let i = 1; i <= numOfPlayers; i++) {
+                newPlayers.push(snapshot.val().players[i]);
+            }
+            this.setState(() => ({ players: newPlayers }));
+            if (numOfPlayers == 1) { //if the room is being made and not joined
+                database.ref(`rooms/${roomCode}/lobby`).set(true);
+                database.ref(`rooms/${roomCode}/playerTurn`).set(0);
             }
           }).catch((e) => {
               
+        });
+
+        database.ref(`rooms/${roomCode}`).on('value', (snapshot) => {
+            const numOfPlayers = snapshot.val().numOfPlayers;
+            let newPlayers = []
+            for (let i = 1; i <= numOfPlayers; i++) {
+                newPlayers.push(snapshot.val().players[i]);
+            }
+            this.setState(() => ({ players: newPlayers }));
+            this.setState(() => ({ turns: snapshot.val().turns }));
+            if (snapshot.val().displayStory) {
+                this.setState(() => ({ displayStory: true }));
+            }
         });
     }
 
     state = {
         displayStory: false,
-        isHost: false
+        isHost: false,
+        turns: 1,
+        players: [],
+        lobby: true,
+        playerNum: 0
     }
 
     startStory = () => {
-        console.log(this.props.match.params.code);
-        this.setState({
-            displayStory: true
-        })
+        database.ref(`rooms/${this.props.match.params.code.substring(1)}/turns`).set(this.state.turns);
+        database.ref(`rooms/${this.props.match.params.code.substring(1)}/displayStory`).set(true);
+        database.ref(`rooms/${this.props.match.params.code.substring(1)}/lobby`).set(false);
+        this.setState(() => ({ displayStory: true }));
+    }
+
+    onLengthChange = (e) => {
+        const numOfTurns = e.target.value
+        this.setState(() => ({ turns: numOfTurns }));
     }
 
     render() {
@@ -40,12 +69,16 @@ export default class RoomPage extends React.Component {
             {!this.state.displayStory && 
                 <div>
                     <h2>Create a Room</h2>
+                    {this.state.isHost && 
+                        <input type="text" pattern="[0-9]" placeholder="Number of turns" onChange={this.onLengthChange} />
+                    }
                     <button onClick={this.startStory} disabled={!this.state.isHost}>Start Story</button>
                 </div>
             }
             {this.state.displayStory && 
-                <StoryPage />
+                <StoryPage players={this.state.players} turns={this.state.turns} code={this.props.match.params.code.substring(1)} playerNum={this.state.playerNum} displayed={this.state.displayStory} />
             }
+            <h3>Room Code: {this.props.match.params.code.substring(1)}</h3>
         </div>
       )
     }

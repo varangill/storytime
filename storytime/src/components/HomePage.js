@@ -19,7 +19,10 @@ function HomePage() {
     database.ref(`ids/${firebase.auth().currentUser.uid}`).once('value').then((snapshot) => {
       database.ref(`rooms/${code}/host`).set(firebase.auth().currentUser.uid);
       database.ref(`rooms/${code}/numOfPlayers`).set(1);
-      database.ref(`rooms/${code}/players/1`).set(snapshot.val());
+      database.ref(`rooms/${code}/players/0`).set(snapshot.val());
+      database.ref(`rooms/${code}/playerTurn`).set(0);
+      database.ref(`rooms/${code}/story`).set('');
+      database.ref(`rooms/${code}/prompt`).set('');
       history.push(`/room:${code}`);
     }).catch((e) => {
         
@@ -37,7 +40,7 @@ function HomePage() {
         const num = snapshot.val();
         database.ref(`ids/${firebase.auth().currentUser.uid}`).once('value').then((snapshot) => {
           database.ref(`rooms/${search}/numOfPlayers`).set(num + 1);
-          database.ref(`rooms/${search}/players/${num+1}`).set(snapshot.val());
+          database.ref(`rooms/${search}/players/${num}`).set(snapshot.val());
           history.push(`/room:${search}`);
         }).catch((e) => {
             
