@@ -18,8 +18,9 @@ function HomePage() {
 
   return (
     <div>
-        <h2>a cozy home</h2>
-        <button onClick={createPublicRoom}>Create Public Room</button>
+      <h1 className="title">StoryTime</h1>
+      <h2 className="subtitle">An interactive story builder</h2>
+      <button onClick={createPublicRoom}>Create Public Room</button>
     </div>
   );
 }
