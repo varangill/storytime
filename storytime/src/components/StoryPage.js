@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 export default class StoryPage extends React.Component {
   constructor(props) {
@@ -97,6 +98,17 @@ export default class StoryPage extends React.Component {
       
       <div className="container">
         <h3 style={title}> The Story</h3>
+        <CountdownCircleTimer 
+          id="timer"
+          isPlaying
+          duration={10}
+          colors={[
+            ['#3E86C2', 0.33],
+          ]}
+          size={80}
+        >
+          {({ remainingTime }) => remainingTime}
+        </CountdownCircleTimer>
         <h4 className="story">{this.state.story}</h4>
         {!this.state.prompted &&
           <div >
