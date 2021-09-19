@@ -112,22 +112,90 @@ export default class RoomPage extends React.Component {
         this.setState(() => ({ turns: numOfTurns }));
     }
 
-    render() {
+    render() 
+        {const titles = {
+            fontSize: 50,
+            color: "#4a54f1",
+            textAlign: "center",
+            paddingTop: "100px",
+            fontFamily: "Ubuntu",
+          }
+        
+        
+          const subtitles = {
+            fontSize: 20,
+            color: "#4a54f1",
+            textAlign: "center",
+            paddingTop: "0px",
+            fontFamily: "Ubuntu",
+          }
+        
+          const buttonStyle2 = {
+            fontSize: 20,
+            color: "white",
+            paddingTop: "10px",
+            paddingBottom: "10px",
+            paddingRight: "10px",
+            paddingLeft: "10px",
+            marginLeft: "auto",
+            marginRight: "auto", backgroundColor: "#3E86C2",
+            borderRadius: 5,
+            borderColor: "#3E86C2",
+            width: '270px'
+          }
+        
+          const inputStyle2 = {
+            fontSize: 20,
+            color: "black",
+            paddingTop: "10px",
+            paddingBottom: "10px",
+            paddingRight: "10px",
+            paddingLeft: "10px",
+            marginLeft: "auto",
+            marginRight: "auto", backgroundColor: "white",
+            borderRadius: 5,
+            borderColor: "#3E86C2",
+            fontType: "Ubuntu",
+          }
+        
+          const imageStyle2 = {
+            fontSize: 20,
+            color: "white",
+            paddingTop: "10px",
+            paddingBottom: "10px",
+            paddingRight: "10px",
+            paddingLeft: "10px",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }
+        
+          const fillers = {
+            fontSize: 20,
+            color: "#FCF7F8",
+            textAlign: "center",
+            paddingTop: "10px",
+        
+          }
+        
       return (
-        <div>
+        <div style={{color: "#CCEEFF", backgroundImage: `url(${background})`, height: "100%", width: "100%", backgroundRepeat: "repeat", resizeMode: "stretch"}}>
             {!this.state.displayStory && 
                 <div>
-                    <h2>Create a Room</h2>
+                    <h2 style={titles}>Create a Room</h2>
                     {this.state.isHost && 
-                        <input type="text" pattern="[0-9]" placeholder="Number of turns" onChange={this.onLengthChange} />
+                    <div style={{display: 'flex'}}>
+                        <input type="text" pattern="[0-9]" placeholder="Number of turns" onChange={this.onLengthChange} style={inputStyle2} />
+                   </div>
                     }
-                    <button onClick={this.startStory} disabled={!this.state.isHost}>Start Story</button>
+                    <div style={{display: 'flex'}}>
+                    <button onClick={this.startStory} disabled={!this.state.isHost} style={buttonStyle2}>Start Story</button>
+                    </div>
                 </div>
             }
             {this.state.displayStory && 
                 <StoryPage players={this.state.players} turns={this.state.turns} code={this.props.match.params.code.substring(1)} playerNum={this.state.playerNum} displayed={this.state.displayStory} />
             }
-            <h3>Room Code: {this.props.match.params.code.substring(1)}</h3>
+            <h3 style={subtitles}>Room Code: {this.props.match.params.code.substring(1)}</h3>
         </div>
       )
 

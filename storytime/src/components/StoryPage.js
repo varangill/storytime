@@ -1,5 +1,6 @@
 import React from 'react'
 import database from '../firebase/firebase.js'
+import background from './assets/background.jpeg'
 
 export default class StoryPage extends React.Component {
   constructor(props) {
@@ -69,19 +70,81 @@ export default class StoryPage extends React.Component {
         
     });
     database.ref(`rooms/${this.props.code}/story`).set(this.state.story);
-    database.ref(`rooms/${this.props.code}/prompt`).set(this.state.prompt);
+    database.ref(`rooms/${this.props.code}/prompt`).set(this.state.currentLine);
     this.setState(() => ({ error: '' }));
     this.setState(() => ({ currentLine: '' }))
     this.setState(() => ({ prompted: false }));
   }
 
-  render() {
+  render() {const title = {
+    fontSize: 50,
+    color: "#4a54f1",
+    textAlign: "center",
+    paddingTop: "100px",
+    fontFamily: "Ubuntu",
+  }
+
+
+  const subtitle = {
+    fontSize: 20,
+    color: "#4a54f1",
+    textAlign: "center",
+    paddingTop: "0px",
+    fontFamily: "Ubuntu",
+  }
+
+  const buttonStyle1 = {
+    fontSize: 20,
+    color: "white",
+    paddingTop: "10px",
+    paddingBottom: "10px",
+    paddingRight: "10px",
+    paddingLeft: "10px",
+    marginLeft: "auto",
+    marginRight: "auto", backgroundColor: "#3E86C2",
+    borderRadius: 5,
+    borderColor: "#3E86C2",
+    width: '270px'
+  }
+
+  const inputStyle1 = {
+    fontSize: 20,
+    color: "black",
+    paddingTop: "10px",
+    paddingBottom: "10px",
+    paddingRight: "10px",
+    paddingLeft: "10px",
+    marginLeft: "auto",
+    marginRight: "auto", backgroundColor: "white",
+    borderRadius: 5,
+    borderColor: "#3E86C2",
+    fontType: "Ubuntu",
+  }
+
+  const imageStyle1 = {
+    fontSize: 20,
+    color: "white",
+    paddingTop: "10px",
+    paddingBottom: "10px",
+    paddingRight: "10px",
+    paddingLeft: "10px",
+    marginLeft: "auto",
+    marginRight: "auto",
+  }
+
+  const filler = {
+    fontSize: 20,
+    color: "#FCF7F8",
+    textAlign: "center",
+    paddingTop: "10px",
+
+  }
     return (
-      <div>
-        <h3>The Story</h3>
-        <h4>{this.state.story}</h4>
+      <div style={{color: "#CCEEFF", backgroundImage: `url(${background})`, height: "100%", width: "100%", backgroundRepeat: "repeat", resizeMode: "stretch"}}>
+        <h3 style={title}>The Story</h3>
+        <h4 style={subtitle}>{this.state.story}</h4>
         {this.state.yourTurn && 
-          <div>
+          <div style={subtitle}>
             {!this.state.prompted && 
               <div>
                   <h3>Enter in the story's next sentence!</h3>
@@ -91,13 +154,13 @@ export default class StoryPage extends React.Component {
                     </div>
                   }
                   <form onSubmit={this.onSubmitStory}>
-                    <input 
+                    <input style={inputStyle1}
                       type="text"
                       placeholder="Enter sentence"
                       value={this.state.currentLine}
                       onChange={this.onLineChange}
                     />
-                    <button>Submit Sentence</button>
+                    <button style={buttonStyle1}>Submit Sentence</button>
                   </form>
               </div>
             }
@@ -110,14 +173,17 @@ export default class StoryPage extends React.Component {
                       placeholder="Enter prompt"
                       value={this.state.currentLine}
                       onChange={this.onLineChange}
+                      style={inputStyle1}
                     />
-                    <button>Submit Prompt</button>
+                    <button style={buttonStyle1}>Submit Prompt</button>
                   </form>
               </div>
             }
           </div>
         }
+        <div style={subtitle}>
         {this.state.error}
+        </div>
       </div>
     )
   }

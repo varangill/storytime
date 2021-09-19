@@ -143,9 +143,12 @@ function HomePage() {
               onChange={onChangeSearch}
               style={buttonStyle1}
             />
+     
             </div>
-            <button>Search for Room</button>
-
+            <div style={{display: 'flex'}}>
+              
+            <button style={buttonStyle1}>Search for Room</button>
+            </div>
             
             
           </form>
